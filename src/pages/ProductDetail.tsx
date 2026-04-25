@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, Heart, ArrowRight } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import AnimatedPage from '../components/AnimatedPage';
 import './ProductDetail.css';
 
