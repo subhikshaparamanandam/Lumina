@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useState } from 'react';
+import { PRODUCTS } from '../data/products';
 import './WishlistDrawer.css';
 
 interface WishlistDrawerProps {
@@ -10,8 +11,8 @@ interface WishlistDrawerProps {
 
 // Mock wishlist state
 const initialFavorites = [
-  { id: 3, name: 'Celestial Palette', price: 85, image: '/product_featured.png' },
-  { id: 8, name: 'Dewy Lip Oil', price: 28, image: '/product_featured.png' }
+  PRODUCTS[2],
+  PRODUCTS[7]
 ];
 
 export default function WishlistDrawer({ isOpen, onClose }: WishlistDrawerProps) {

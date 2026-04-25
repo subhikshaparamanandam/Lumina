@@ -1,18 +1,8 @@
 import AnimatedPage from '../components/AnimatedPage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { PRODUCTS } from '../data/products';
 import './Shop.css';
-
-const SHOP_PRODUCTS = [
-  { id: 1, name: 'Luminous Foundation', price: '$58', category: 'Face', image: '/product_featured.png' },
-  { id: 2, name: 'Velvet Matte Lipstick', price: '$42', category: 'Lips', image: '/product_featured.png' },
-  { id: 3, name: 'Celestial Palette', price: '$85', category: 'Eyes', image: '/product_featured.png' },
-  { id: 4, name: 'Radiant Glow Blush', price: '$38', category: 'Cheeks', image: '/product_featured.png' },
-  { id: 5, name: 'Illusion Concealer', price: '$32', category: 'Face', image: '/product_featured.png' },
-  { id: 6, name: 'Noir Volume Mascara', price: '$35', category: 'Eyes', image: '/product_featured.png' },
-  { id: 7, name: 'Silk Setting Powder', price: '$48', category: 'Face', image: '/product_featured.png' },
-  { id: 8, name: 'Dewy Lip Oil', price: '$28', category: 'Lips', image: '/product_featured.png' },
-];
 
 export default function Shop() {
   const containerVariants = {
@@ -51,7 +41,7 @@ export default function Shop() {
           initial="initial"
           animate="animate"
         >
-          {SHOP_PRODUCTS.map((product) => (
+          {PRODUCTS.map((product) => (
             <motion.div 
               key={product.id}
               className="shop-product"
@@ -66,7 +56,7 @@ export default function Shop() {
               <div className="shop-product-info">
                 <span className="shop-product-category">{product.category}</span>
                 <h3 className="shop-product-name">{product.name}</h3>
-                <div className="shop-product-price">{product.price}</div>
+                <div className="shop-product-price">${product.price}</div>
               </div>
             </motion.div>
           ))}

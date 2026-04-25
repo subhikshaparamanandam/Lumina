@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
+import { PRODUCTS } from '../data/products';
 import './CartDrawer.css';
 
 interface CartDrawerProps {
@@ -10,8 +11,8 @@ interface CartDrawerProps {
 
 // Mock cart state for demo
 const initialItems = [
-  { id: 1, name: 'Luminous Foundation', price: 58, quantity: 1, image: '/product_featured.png' },
-  { id: 6, name: 'Noir Volume Mascara', price: 35, quantity: 2, image: '/product_featured.png' }
+  { ...PRODUCTS[0], quantity: 1 },
+  { ...PRODUCTS[5], quantity: 2 }
 ];
 
 export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {

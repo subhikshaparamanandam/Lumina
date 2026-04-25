@@ -2,15 +2,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedPage from '../components/AnimatedPage';
+import { PRODUCTS } from '../data/products';
 import './Home.css';
 import { useRef } from 'react';
-
-const FEATURED_PRODUCTS = [
-  { id: 1, name: 'Luminous Foundation', price: '$58', category: 'Face' },
-  { id: 2, name: 'Velvet Matte Lipstick', price: '$42', category: 'Lips' },
-  { id: 3, name: 'Celestial Palette', price: '$85', category: 'Eyes' },
-  { id: 4, name: 'Radiant Glow Blush', price: '$38', category: 'Cheeks' },
-];
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -86,7 +80,7 @@ export default function Home() {
             dragConstraints={carouselRef} 
             className="carousel-track"
           >
-            {FEATURED_PRODUCTS.map((product, idx) => (
+            {PRODUCTS.slice(0, 4).map((product, idx) => (
               <motion.div 
                 key={product.id} 
                 className="product-card"
@@ -96,7 +90,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
               >
                 <div className="product-img-wrapper">
-                  <img src="/product_featured.png" alt={product.name} />
+                  <img src={product.image} alt={product.name} />
                   <div className="product-hover-actions">
                     <button className="btn btn-glass quick-add">Quick Add</button>
                   </div>
@@ -104,7 +98,7 @@ export default function Home() {
                 <div className="product-info">
                   <span className="product-category">{product.category}</span>
                   <h3 className="product-name">{product.name}</h3>
-                  <div className="product-price">{product.price}</div>
+                  <div className="product-price">${product.price}</div>
                 </div>
               </motion.div>
             ))}

@@ -3,23 +3,12 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import AnimatedPage from '../components/AnimatedPage';
+import { PRODUCTS } from '../data/products';
 import './ProductDetail.css';
-
-// Mock DB for the current demo
-const SHOP_PRODUCTS = [
-  { id: '1', name: 'Luminous Foundation', price: '$58', category: 'Face', image: '/product_featured.png', description: 'Experience flawless coverage with our ultra-lightweight Luminous Foundation. Formulated with light-reflecting pearls and hydrating serums, it melts into the skin for a radiant, second-skin finish.' },
-  { id: '2', name: 'Velvet Matte Lipstick', price: '$42', category: 'Lips', image: '/product_featured.png', description: 'A highly pigmented, non-drying matte lipstick that glides on smoothly and stays comfortable all day.' },
-  { id: '3', name: 'Celestial Palette', price: '$85', category: 'Eyes', image: '/product_featured.png', description: 'An ethereal collection of 12 richly pigmented eyeshadows featuring buttery mattes and multi-dimensional shimmers.' },
-  { id: '4', name: 'Radiant Glow Blush', price: '$38', category: 'Cheeks', image: '/product_featured.png', description: 'A silky, buildable powder blush that delivers a natural flush of color with a subtle luminous glow.' },
-  { id: '5', name: 'Illusion Concealer', price: '$32', category: 'Face', image: '/product_featured.png', description: 'A creamy, high-coverage concealer that instantly brightens and blurs imperfections while treating the under-eye area.' },
-  { id: '6', name: 'Noir Volume Mascara', price: '$35', category: 'Eyes', image: '/product_featured.png', description: 'Achieve dramatic, gravity-defying volume and intense black color with just one coat.' },
-  { id: '7', name: 'Silk Setting Powder', price: '$48', category: 'Face', image: '/product_featured.png', description: 'An ultra-fine translucent powder that locks makeup in place for 16 hours without adding weight or texture.' },
-  { id: '8', name: 'Dewy Lip Oil', price: '$28', category: 'Lips', image: '/product_featured.png', description: 'A nourishing tinted lip oil infused with botanical extracts for an ultra-glossy, never-sticky finish.' },
-];
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
-  const product = SHOP_PRODUCTS.find(p => p.id === id) || SHOP_PRODUCTS[0];
+  const product = PRODUCTS.find(p => p.id === Number(id)) || PRODUCTS[0];
 
   const [activeThumb, setActiveThumb] = useState(0);
   const [activeTab, setActiveTab] = useState<'description' | 'ingredients' | 'reviews'>('description');
@@ -97,7 +86,7 @@ export default function ProductDetail() {
           >
             <span className="pdp-category">{product.category}</span>
             <h1 className="pdp-title">{product.name}</h1>
-            <div className="pdp-price">{product.price}</div>
+            <div className="pdp-price">${product.price}</div>
             
             <div className="pdp-actions">
               <motion.button 
@@ -107,7 +96,7 @@ export default function ProductDetail() {
                 animate={isAdded ? { x: [-5, 5, -5, 5, 0] } : {}}
                 transition={{ duration: 0.4 }}
               >
-                {isAdded ? 'Added to Cart' : 'Add to Cart — ' + product.price}
+                {isAdded ? 'Added to Cart' : 'Add to Cart — $' + product.price}
               </motion.button>
               <button className="pdp-wishlist-btn">
                 <Heart size={24} strokeWidth={1} />
@@ -164,14 +153,14 @@ export default function ProductDetail() {
             <h2>Complete The Look</h2>
             <div style={{ display: 'flex', gap: '2rem', marginTop: '2rem', overflowX: 'auto', paddingBottom: '2rem' }} className="no-scrollbar">
                {/* Quick render of a few products for the carousel */}
-               {SHOP_PRODUCTS.slice(0, 3).map(p => (
+               {PRODUCTS.slice(0, 3).map(p => (
                  <Link to={`/product/${p.id}`} key={p.id} style={{ display: 'block', minWidth: '280px' }}>
                     <div style={{ width: '100%', aspectRatio: '4/5', backgroundColor: 'var(--color-secondary)' }}>
                       <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ marginTop: '1rem', textAlign: 'center' }}>
                       <h4 style={{ fontWeight: 400, marginBottom: '0.5rem' }}>{p.name}</h4>
-                      <p style={{ color: 'var(--color-gold)' }}>{p.price}</p>
+                      <p style={{ color: 'var(--color-gold)' }}>${p.price}</p>
                     </div>
                  </Link>
                ))}
